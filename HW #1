@@ -1,0 +1,260 @@
+
+#1
+
+#include <stdio.h>
+
+//helper methods
+void swap(int *xp, int *yp) 
+{ 
+    int temp = *xp; 
+    *xp = *yp; 
+    *yp = temp; 
+} 
+
+void bubbleSort(int arr[], int n) 
+{ 
+   int i, j; 
+   for (i = 0; i < n-1; i++)       
+       for (j = 0; j < n-i-1; j++)  
+           if (arr[j] > arr[j+1]) 
+              swap(&arr[j], &arr[j+1]); 
+}
+//
+
+int main()
+{
+    int size;
+    printf("Enter a number of array’s size for a series of numbers saving: ");
+    scanf("%d", &size);  
+    
+    int array[size];
+    printf("Enter a series of numbers:");
+    for(int i=0; i<size; i++)
+    {
+       scanf("%d",&array[i]); 
+    }
+    
+    //sort
+    bubbleSort(array,size);
+
+    //print array
+    for(int i=0; i<size; i++)
+    {
+        printf("%d ", array[i]);  
+    }
+    return 0;
+}
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+#2
+
+#include <stdio.h>
+
+//helper methods
+void swap(int *xp, int *yp) 
+{ 
+    int temp = *xp; 
+    *xp = *yp; 
+    *yp = temp; 
+} 
+
+void bubbleSort(int arr[], int n) 
+{ 
+   int i, j; 
+   for (i = 0; i < n-1; i++)       
+       for (j = 0; j < n-i-1; j++)  
+           if (arr[j] > arr[j+1]) 
+              swap(&arr[j], &arr[j+1]); 
+}
+//
+
+int main()
+{
+    int size;
+    printf("Enter a number of array’s size for a series of numbers saving: ");
+    scanf("%d", &size);  
+    
+    int array[size];
+    printf("Enter a series of numbers:");
+    for(int i=0; i<size; i++)
+    {
+       scanf("%d",&array[i]); 
+    }
+    
+    bubbleSort(array,size);
+
+    //print odd
+    for(int i=0; i<size; i++)
+    {
+        if(array[i]%2==1)
+            printf("%d ", array[i]);  
+    }
+    
+    //print even
+    for(int i=0; i<size; i++)
+    {
+        if(array[i]%2==0)
+            printf("%d ", array[i]);  
+    }
+    return 0;
+}
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+#3 
+
+#include <stdio.h>
+
+int main ()
+{
+	int a;
+	
+	printf("Enter how many cuts you want: ");
+	scanf ("%d", &a);
+	
+	int p=2;
+	for (int i=1; i<=a; i++)
+	{
+		if (i > 1)
+		{
+			p += i;
+		}
+	}
+	
+	printf("Pieces will be: %d ", p);
+	
+	return 0;
+}
+
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+#4
+
+
+#include <stdio.h>
+
+int main()
+{
+    int n;
+    printf("Enter decimal number: ");
+    scanf("%d", &n);  
+    
+    int count = 0; 
+    while (n) { 
+        count += n & 1; 
+        n >>= 1; 
+    } 
+    printf("%d", count); 
+    return 0;
+}
+
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+#5
+
+#include <stdio.h>
+
+void sort ();
+int largest (float[], int);
+
+int main ()
+{
+	int num;
+	
+	printf ("Enter total number of Petri dishes: ");
+	scanf ("%d", &num);
+	
+	int label[num], oriNum[num], newBac[num];
+	float pr[num];
+	printf ("Enter Petri dish label, original bacterial number, new bacterial number after one hour reproduction:\n");
+	
+	for (int i=0; i<num; i++)
+	{
+		scanf ("%d%d%d", &label[i], &oriNum[i], &newBac[i] );
+		pr[i]=(float)newBac[i]/oriNum[i];
+    
+	}
+    
+
+
+	
+	sort ( pr, label, num);
+	
+  float diff[num-1];
+	for (int i=0; i<num-1; i++){
+		diff[i]= pr[i+1]-pr[i];
+	}
+
+  int n;
+  n=largest (diff, num);
+  printf("Running results:");
+  printf("\n%d in A sub-species and Petri dish labels from smaller PR to bigger PR are:\n", n+1);
+  for (int i=0; i< num; i++)
+  {
+    if (i<n+1)
+    {
+      printf ("%d ", label[i]);
+    }
+  }
+
+  printf("\n%d in B sub-species and Petri dish labels from smaller PR to bigger PR are:\n", num-n-1);
+  for (int i=0; i< num; i++)
+  {
+    if (i>=n+1)
+    {
+      printf ("%d ", label[i]);
+    }
+  }
+	
+	return 0;	
+}
+
+
+
+ void sort (float pr[], int label[], int num)
+ {
+	 for (int i=1; i<num; i++)
+	 {
+		 for (int j=0; j<num-i; j++)
+		 {
+			float temp1; 
+      int temp2;
+			if (pr[j]>pr[j+1])
+			{ 
+				temp1 = pr[j];
+				pr[j] = pr[j+1];
+				pr[j+1] = temp1;
+				
+				temp2 = label[j];
+				label[j] = label[j+1];
+				label[j+1] = temp2;
+        
+			}		 
+		 }
+	 }
+ }
+
+ int largest (float diff[], int num)
+ {
+   int max, i=0;
+   max = i;
+   for (i=0; i< num-2; i++)
+   {
+     if (diff[i+1]>diff[max])
+     {
+       max=i+1;
+     }
+   }
+   return max;
+ }
+
